@@ -23,8 +23,8 @@ BUPT-RTOS is a Real-Time OS(RTOS) using dual-kernel method. The real time part i
 ## Base Knowledge
 
 1. Operating System
-    - [Details](./operating_system/README.md)
+    - [Details](./base_knowledge/operating_system/README.md)
 2. Rust
-    - [Details](./rust/README.md)
+    - [Details](./base_knowledge/rust/README.md)
 3. Satellite
-    - [Details](./satellite/README.md)
+    - [Details](./base_knowledge/satellite/README.md)
