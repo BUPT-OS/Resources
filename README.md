@@ -19,3 +19,8 @@ BUPT-RTOS is a Real-Time OS(RTOS) using dual-kernel method. The real time part i
 5. RTAI：Another dual-kernel RTOS. But it is less activate than Xenomai.
     - [HomePage](https://www.rtai.org/)
     - [Details](./related_projects/RTAI.md)
+
+## Base Knowledge
+
+1. Operating System
+    - [Details](./operating_system/README.md)

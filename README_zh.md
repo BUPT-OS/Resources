@@ -19,3 +19,8 @@ BUPT-RTOS 是一个实时操作系统，实时内核部分采用rust编写。
 5. RTAI：另一个双内核Linux实时操作系统，但是活跃程度一般。
     - [主页](https://www.rtai.org/)
     - [细节](./related_projects/RTAI.md)
+
+## 基础知识
+
+1. 操作系统
+   - [细节](./operating_system/README.md)
