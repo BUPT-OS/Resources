@@ -23,6 +23,6 @@ BUPT-RTOS 是一个实时操作系统，实时内核部分采用rust编写。
 ## 基础知识
 
 1. 操作系统
-   - [细节](./operating_system/README.md)
+    - [细节](./operating_system/README.md)
 2. Rust
-   - [细节](./rust/README.md)
+    - [细节](./rust/README.md)
