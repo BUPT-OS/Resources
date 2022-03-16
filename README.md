@@ -2,6 +2,15 @@
 
 BUPT-RTOS is a Real-Time OS(RTOS) using dual-kernel method. The real time part is a microkernel written in rust.
 
+## project files
+
+1. debug list
+    - Here lists the common bugs we have met and gives their solutions.
+    - [debug_list](./project_files/debug_list.md)
+2. feature list
+    - Here lists the features we want to achieve in rust and the methods for accomplish them.
+    - [feature_list](./project_files/feature_list.md)
+
 ## Related projects
 
 1. rCore: An OS writen in rust.
