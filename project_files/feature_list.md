@@ -20,7 +20,7 @@
         - 采用锁或者原子变量，这种方法适用于会发生多线程并发的情况；
             - 如果这个变量的类型可以采用原子类型，那就采用原子类型；
             - 采用锁包裹，以达到同步的目的，但是此时会遇到const function的问题，需要采用lazy_static，而rust-for-linux里面又没有；
-              - 此时采用core中的lazy函数；
+              - 好消息是此时可以采用core中的synclazy函数，坏消息是synclazy在rust-for-linux也没有；
 
 ## 如何在rust中实现C的feature(rust-for-linux项目)
 
