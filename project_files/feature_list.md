@@ -23,6 +23,21 @@
               - 好消息是此时可以采用core中的synclazy函数，坏消息是synclazy在rust-for-linux也没有；
               - 所以rust-for-linux实现了"kernel::init_static_sync!"这个宏，但是需要迁移到最新的rust-for-linux上才可以；
 
+3. 复杂结构体的初始化
+    - 问题解释
+        - 结构体成员较多的情况下，直接写一个结构体就显得比较臃肿，需要写大量的代码；如何优雅写一个初始化函数，减轻实例化时的痛苦就成了关键问题；
+    - 解决方法
+        - 用关联函数new初始化结构体，可以让大家少写一部分初始化需求一样的成员；
+            - 这个方法的问题，每一次初始化一个实例时，都需要指定所有的需要初始化的成员变量，代码太长而且参数记不住，如果可以让初始化有默认参数就更好了；
+        - 用build pattern解决
+            - 这个方法可以有任意长度的默认参数，但是实在是太代码臃肿了；
+        - 用default方法
+            - 这个方法目前是效果最好的;
+    - 参考链接
+        - [结构体初始化的三种方法](https://zhuanlan.zhihu.com/p/112202164)
+        - [default文档](https://doc.rust-lang.org/std/default/trait.Default.html)
+        - [default的几个例子](https://rust-unofficial.github.io/patterns/idioms/ctor.html)
+
 ## 如何在rust中实现C的feature(rust-for-linux项目)
 
 1. 如何在rust中实现for_each_online_cpu的功能
@@ -31,5 +46,5 @@
     - 解决方法
         - 目前在rust-for-linux的官方论坛上求助，在不改变逻辑的情况下是无法直接包裹的；
         - 所以决定直接改变这个宏的逻辑，返回一个数组，成员是online的cpu index；
-            - - 目前根据论坛上的意见，我用迭代器实现了这个宏，相关代码放在了cpumask.rs里面；
+            - 目前根据论坛上的意见，我用迭代器实现了这个宏，相关代码放在了cpumask.rs里面；
         - 官方论坛上还提到的方法有在rust侧重写整个for_each_online_cpu逻辑，或者采用callback函数实现（整个方法目前不太明确）；
