@@ -48,3 +48,26 @@
         - 所以决定直接改变这个宏的逻辑，返回一个数组，成员是online的cpu index；
             - 目前根据论坛上的意见，我用迭代器实现了这个宏，相关代码放在了cpumask.rs里面；
         - 官方论坛上还提到的方法有在rust侧重写整个for_each_online_cpu逻辑，或者采用callback函数实现（整个方法目前不太明确）；
+2. C中的结构体位域如何在rust中实现
+    - 问题解释
+        - rust中没有方法给struct指定字段长度，现有的方法都比较麻烦；
+    - 解决方法
+        - 暂时停滞；
+3. C中的union如何在rust中实现
+    - 问题解释
+        - rust中是有union的，但是不太好用，需要所有的成员类型全部实现了copy的trait，对于复杂结构的union时，rust就不太好实现；
+    - 解决方法
+        - rust中的enum可以基本实现union的内容，给enum内的元素套一个壳子，内部是想要实现的内容；
+
+            ```rust
+            enum EvlMonitorState_item {
+                gate(EvlMonitorState_item_gate),
+                event(EvlMonitorState_item_event),
+            }
+            ```
+
+4. 结构体指针成员
+    - 问题解释
+        - 结构体成员是指针类型，c的裸指针在rust中不太安全；
+    - 解决方法
+        - 根据需求用智能指针加锁包裹起来；
