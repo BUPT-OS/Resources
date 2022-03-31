@@ -135,13 +135,14 @@
 
 1. linux中的常用函数和宏
 
-   | 函数/宏               | 实现情况                                 |
-   | --------------------- | ---------------------------------------- |
-   | for_each_possible_cpu | kernel/cpumask.rs::PossibleCpusIndexIter |
-   | for_each_online_cpu   | kernel/cpumask.rs::OnlineCpusIndexIter   |
-   | for_each_present_cpu  | kernel/cpumask.rs::PresentCpusIndexIter  |
-   | per_cpu               | 没有实现                                 |
-   | per_cpu_ptr           | 没有实现                                 |
+   | 函数/宏               | 实现情况                                    |
+   | --------------------- | ------------------------------------------- |
+   | for_each_possible_cpu | kernel/cpumask.rs::PossibleCpusIndexIter    |
+   | for_each_online_cpu   | kernel/cpumask.rs::OnlineCpusIndexIter      |
+   | for_each_present_cpu  | kernel/cpumask.rs::PresentCpusIndexIter     |
+   | per_cpu               | 没有实现                                    |
+   | per_cpu_ptr           | kernel/percpu_defs.rs::PresentCpusIndexIter |
+   | alloc_percpu          | kernel/percpu.rs::AllocPerCpu               |
 
 2. linux中的模块功能
 
