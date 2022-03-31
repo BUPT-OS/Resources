@@ -3,7 +3,7 @@
 - [rust feature list](#rust-feature-list)
   - [rust本身的feature如何实现](#rust本身的feature如何实现)
   - [如何在rust中实现C的feature(rust-for-linux项目)](#如何在rust中实现c的featurerust-for-linux项目)
-  - [rust-for-linux中实现的常用C宏](#rust-for-linux中实现的常用c宏)
+  - [rust-for-linux对linux常用功能的实现情况](#rust-for-linux对linux常用功能的实现情况)
 
 ## rust本身的feature如何实现
 
@@ -73,12 +73,34 @@
     - 解决方法
         - 根据需求用智能指针加锁包裹起来；
 
-## rust-for-linux中实现的常用C宏
+## rust-for-linux对linux常用功能的实现情况
 
-|c宏|rust-for-linux实现情况|
-|-|-|
-|for_each_possible_cpu|kernel/cpumask.rs::PossibleCpusIndexIter|
-|for_each_online_cpu|kernel/cpumask.rs::OnlineCpusIndexIter|
-|for_each_present_cpu|kernel/cpumask.rs::PresentCpusIndexIter|
-|per_cpu|没有实现|
-|per_cpu_ptr|没有实现|
+1. linux中的常用函数和宏
+
+    |函数/宏|实现情况|
+    |-|-|
+    |for_each_possible_cpu|kernel/cpumask.rs::PossibleCpusIndexIter|
+    |for_each_online_cpu|kernel/cpumask.rs::OnlineCpusIndexIter|
+    |for_each_present_cpu|kernel/cpumask.rs::PresentCpusIndexIter|
+    |per_cpu|没有实现|
+    |per_cpu_ptr|没有实现|
+
+2. linux中的模块功能
+
+    |模块|函数/宏|实现情况|
+    |-|-|-|
+    |cpumask相关|||
+    ||cpulist_parse|kernel/cpumask.rs::cpulist_parse|
+    ||cpumask_copy|kernel/cpumask.rs::cpumask_copy|
+    |内存相关|||
+    ||vmalloc|kernel/vmalloc.rs::c_vmalloc|
+    ||vfree|kernel/vmalloc.rs::c_vfree|
+    ||kzalloc|kernel/vmalloc.rs::c_kzalloc|
+    ||kfree|kernel/vmalloc.rs::c_kzfree|
+
+3. Dovetail相关函数和宏
+
+    |函数/宏|实现情况|
+    |-|-|
+    |running_inband|kernel/premmpt.rs::running_inband|
+    |PAGE_ALIGN|kernel/mm.rs::page_aligned|
