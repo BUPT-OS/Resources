@@ -3,6 +3,7 @@
 - [rust feature list](#rust-feature-list)
   - [rust本身的feature如何实现](#rust本身的feature如何实现)
   - [如何在rust中实现C的feature(rust-for-linux项目)](#如何在rust中实现c的featurerust-for-linux项目)
+  - [rust-for-linux中实现的常用C宏](#rust-for-linux中实现的常用c宏)
 
 ## rust本身的feature如何实现
 
@@ -71,3 +72,13 @@
         - 结构体成员是指针类型，c的裸指针在rust中不太安全；
     - 解决方法
         - 根据需求用智能指针加锁包裹起来；
+
+## rust-for-linux中实现的常用C宏
+
+|c宏|rust-for-linux实现情况|
+|-|-|
+|for_each_possible_cpu|kernel/cpumask.rs::PossibleCpusIndexIter|
+|for_each_online_cpu|kernel/cpumask.rs::OnlineCpusIndexIter|
+|for_each_present_cpu|kernel/cpumask.rs::PresentCpusIndexIter|
+|per_cpu|没有实现|
+|per_cpu_ptr|没有实现|
