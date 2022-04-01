@@ -63,8 +63,6 @@
        p2.v = 5;
        ```
 
-       
-
      - 2.由于不能同时存在可变引用和不可变引用（虽然RefCell能保证编译通过，但仍会在运行时panic），所以需要在修改完成后，手动将可变引用释放；
 
        ```rust
@@ -78,7 +76,23 @@
        //下面再使用p1
        ```
 
-       
+5. 循环引用
+
+    - 问题解释
+        - 结构体中可能出现循环引用的问题
+    - 解决方法
+        - 可以使用weak来解决；
+            - rust-for-linux 项目目前没有weak的支持，所以只能使用unsafe;
+        - unsafe简单粗暴；
+
+6. 自引用
+
+    - 问题解释
+        - 结构体可能出现自引用的问题
+    - 解决方法
+        - option
+        - unsafe
+        - unsafe+pin
 
 ## 如何在rust中实现C的feature(rust-for-linux项目)
 
@@ -131,6 +145,8 @@
      - 直接使用fn(sth)->sth作为函数指针会遇到无法初始化的问题；
    - 解决方法
      - 使用Option包裹一层，在初始化时使用None；
+   - 待解决问题
+     - 如果一个函数指针想要指向多种函数类型如何解决
 
 ## rust-for-linux对linux常用功能的实现情况
 
@@ -164,4 +180,3 @@
    | -------------- | --------------------------------- |
    | running_inband | kernel/premmpt.rs::running_inband |
    | PAGE_ALIGN     | kernel/mm.rs::page_aligned        |
-
