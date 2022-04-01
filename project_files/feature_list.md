@@ -1,4 +1,4 @@
-# rust feature list
+﻿# rust feature list
 
 - [rust feature list](#rust-feature-list)
   - [rust本身的feature如何实现](#rust本身的feature如何实现)
@@ -25,6 +25,7 @@
        - 采用锁包裹，以达到同步的目的，但是此时会遇到const function的问题，需要采用lazy_static，而rust-for-linux里面又没有；
          - 好消息是此时可以采用core中的synclazy函数，坏消息是synclazy在rust-for-linux也没有；
          - 所以rust-for-linux实现了"kernel::init_static_sync!"这个宏，但是需要迁移到最新的rust-for-linux上才可以；
+            - 这个宏目前支持的功能比较有限，比如不支持rc和arc，也不支持refcell，只能使用单独一个mutex，需要看后续的发展情况。2022.4.1
 
 3. 复杂结构体的初始化
 
