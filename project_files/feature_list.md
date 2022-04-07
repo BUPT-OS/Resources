@@ -131,6 +131,49 @@
    - 解决方法
      - 使用Option包裹一层，在初始化时使用None；
 
+6. 使用Option<Rc<RefCell<sth>>>实现链表的遍历
+
+   - 问题解释
+
+     - 常见的rust实现链表的方式有裸指针、使用Option和Box包裹结构体，但少见Option、Rc、RefCell的组合
+
+   - 解决方法
+
+     - 链表的next指针使用Option类型，通过组合clone和RefCell的borrow或borrow_mut方法来实现链表的遍历
+
+       ``` rust
+       struct ListNode{
+           next:Option<Rc<RefCell<ListNode>>>,
+           v:i32,
+       }
+       
+       
+       fn test(){
+           let mut node1 = ListNode{
+               next:None,
+               v:1,
+           };
+           let mut node2 = ListNode{
+               next:None,
+               v:2,
+           };
+           let head = Rc::new(RefCell::new(node1));
+           let ptr = Rc::new(RefCell::new(node2));
+           head.borrow_mut().next = Some(ptr);
+           // 上面初始化两个节点
+       
+           // 使用Option<Rc<RefCell<ListNode>>>作为指针
+           let mut p = Some(head.clone()); // 注意clone头结点
+           while p.is_some(){
+               println!("{}",p.clone().unwrap().borrow_mut().v); // 使用链表中的数据
+               p = p.clone().unwrap().borrow_mut().next.clone(); // p = p->next
+           }
+       
+       }
+       ```
+
+       
+
 ## rust-for-linux对linux常用功能的实现情况
 
 1. linux中的常用函数和宏
